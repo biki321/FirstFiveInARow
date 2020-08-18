@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Game</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"
+      integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA=="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <canvas height="400" width="400"></canvas>
+    <div class="controls-wrapper">
+      <ul id="events"></ul>
+      <div class="controls">
+        <div class="chat-wrapper">
+          <form id="chat-form">
+            <input id="chat" autocomplete="off" title="chat" />
+            <button id="say">Say</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <script src="src/client.js"></script>
+  </body>
+</html>
