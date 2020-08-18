@@ -48,9 +48,10 @@ const getBoard = (canvas, numCells = 20) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 
-  const reset = () => {
+  const reset = (board) => {
     clear();
     drawGrid();
+    renderBoard(board);
   };
 
   //x,y is coordinate of the mouse click relative to canvas
@@ -59,6 +60,14 @@ const getBoard = (canvas, numCells = 20) => {
       x: Math.floor(x / cellSize),
       y: Math.floor(y / cellSize),
     };
+  };
+
+  const renderBoard = (board = []) => {
+    board.forEach((row, y) => {
+      row.forEach((color, x) => {
+        color && fillCell(x, y, color);
+      });
+    });
   };
 
   return { fillCell, reset, getCellCoordinates };
@@ -91,9 +100,11 @@ const getClickCoordinates = (element, ev) => {
     sock.emit("turn", getCellCoordinates(x, y));
   };
 
-  reset();
-
   /** receiving the data from server and acting accordingly **/
+
+  //server will send current state of the global game
+  //and reset will draw this
+  sock.on("board", reset);
   sock.on("message", (text) => log(text));
   //draw a small pixel like rect when server sends a cell coordinate
   sock.on("turn", ({ x, y, color }) => fillCell(x, y, color));
