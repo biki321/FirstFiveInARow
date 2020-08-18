@@ -18,6 +18,9 @@ io.on("connection", (sock) => {
 
   //broadcasting the msg sent by one client
   sock.on("message", (text) => io.emit("message", text));
+  //whenever a client will do a mouse click on their canvas
+  //we will get their coordinates on canvas ,it is broadcated to others.
+  sock.on("turn", ({ x, y }) => io.emit("turn", { x, y }));
 });
 
 server.on("error", () => {
